@@ -1,0 +1,4 @@
+name: UpBlock
+version: '${project.version}'
+main: com.lutto.upblock.UpBlock
+api-version: '1.20'

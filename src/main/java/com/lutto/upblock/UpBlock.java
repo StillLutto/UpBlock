@@ -1,17 +1,15 @@
 package com.lutto.upblock;
 
+import com.lutto.upblock.listeners.PlayerJoinListener;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class UpBlock extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
 
-    }
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
 
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
     }
 }

@@ -9,6 +9,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.permissions.PermissionAttachment;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 public class RankListener implements Listener {
 
@@ -21,8 +25,23 @@ public class RankListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
 
-        mainClass.getNametagManager().setNametags(event.getPlayer());
-        mainClass.getNametagManager().newTag(event.getPlayer());
+        Player player = event.getPlayer();
+        PermissionAttachment permissionAttachment;
+        HashMap<UUID, PermissionAttachment> permissions = mainClass.getRankManager().getPermissions();
+
+        if (!permissions.containsKey(player.getUniqueId())) {
+            permissionAttachment = player.addAttachment(mainClass);
+            permissions.put(player.getUniqueId(), permissionAttachment);
+        } else {
+            permissionAttachment = permissions.get(player);
+        }
+
+        for (String permission : mainClass.getRankManager().getRank(player.getUniqueId()).getPermissions()) {
+            permissionAttachment.setPermission(permission, true);
+        }
+
+        mainClass.getNametagManager().setNametags(player);
+        mainClass.getNametagManager().newTag(player);
 
     }
 

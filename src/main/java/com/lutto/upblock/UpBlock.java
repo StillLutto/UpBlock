@@ -2,6 +2,7 @@ package com.lutto.upblock;
 
 import com.lutto.upblock.commands.RankCommand;
 import com.lutto.upblock.commands.tabcompleters.RankTabCompleter;
+import com.lutto.upblock.listeners.CustomTabListListener;
 import com.lutto.upblock.listeners.RankListener;
 import com.lutto.upblock.listeners.PlayerJoinListener;
 import com.lutto.upblock.managers.RankManager;
@@ -17,6 +18,7 @@ public final class UpBlock extends JavaPlugin {
 
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
         Bukkit.getPluginManager().registerEvents(new RankListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new CustomTabListListener(), this);
         getCommand("rank").setExecutor(new RankCommand(this));
         getCommand("rank").setTabCompleter(new RankTabCompleter());
 

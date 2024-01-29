@@ -6,7 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
-import org.bukkit.util.io.BukkitObjectInputStream;
 
 import java.io.File;
 import java.io.IOException;
@@ -79,8 +78,8 @@ public class RankManager {
 
         if (Bukkit.getOfflinePlayer(uuid).isOnline()) {
             Player player = Bukkit.getPlayer(uuid);
-            mainClass.getNametagManager().removeTag(player);
-            mainClass.getNametagManager().newTag(player);
+            Rank playerRank = mainClass.getRankManager().getRank(player.getUniqueId());
+            player.setPlayerListName(playerRank.getDisplay() + " " + player.getName());
         }
 
     }

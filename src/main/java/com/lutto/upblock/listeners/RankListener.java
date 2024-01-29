@@ -8,7 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.permissions.PermissionAttachment;
 
 import java.util.HashMap;
@@ -40,16 +39,6 @@ public class RankListener implements Listener {
             permissionAttachment.setPermission(permission, true);
         }
 
-        mainClass.getNametagManager().setNametags(player);
-        mainClass.getNametagManager().newTag(player);
-
-    }
-
-    @EventHandler
-    public void onPlayerLeave(PlayerQuitEvent event) {
-
-        mainClass.getNametagManager().removeTag(event.getPlayer());
-
     }
 
     @EventHandler
@@ -59,7 +48,7 @@ public class RankListener implements Listener {
 
         Player player = event.getPlayer();
 
-        Bukkit.broadcastMessage(mainClass.getRankManager().getRank(player.getUniqueId()).getDisplay() + ChatColor.GRAY + " " + player.getName() + " -> " + ChatColor.GRAY + event.getMessage());
+        Bukkit.broadcastMessage(mainClass.getRankManager().getRank(player.getUniqueId()).getDisplay() + ChatColor.WHITE + " " + player.getName() + " -> " + ChatColor.WHITE + event.getMessage());
 
     }
 

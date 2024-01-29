@@ -3,6 +3,7 @@ package com.lutto.upblock.managers;
 import com.lutto.upblock.Rank;
 import com.lutto.upblock.UpBlock;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
@@ -79,7 +80,7 @@ public class RankManager {
         if (Bukkit.getOfflinePlayer(uuid).isOnline()) {
             Player player = Bukkit.getPlayer(uuid);
             Rank playerRank = mainClass.getRankManager().getRank(player.getUniqueId());
-            player.setPlayerListName(playerRank.getDisplay() + " " + player.getName());
+            player.setPlayerListName(playerRank.getDisplay() + " " + ChatColor.WHITE + player.getName());
         }
 
     }

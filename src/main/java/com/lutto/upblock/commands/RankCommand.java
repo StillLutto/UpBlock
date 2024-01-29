@@ -24,11 +24,9 @@ public class RankCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
 
-            if (player.hasPermission("upblock.rank")) {
+            if (!player.hasPermission("upblock.rank")) {
                 player.sendMessage(ChatColor.RED + "You don't have permission to use this command!");
                 return false;
-            } else {
-                System.out.println(mainClass.getRankManager().getPermissions());
             }
 
             if (!(args.length == 3) || !args[0].equals("set")) {
@@ -49,10 +47,10 @@ public class RankCommand implements CommandExecutor {
                 if (rank.name().equalsIgnoreCase(args[2])) {
 
                     // commented for testing purposes
-                    if (targetPlayer.getUniqueId() == player.getUniqueId()) {
-                        player.sendMessage(ChatColor.RED + "You can't change your own rank!");
-                        return false;
-                    }
+//                    if (targetPlayer.getUniqueId() == player.getUniqueId()) {
+//                        player.sendMessage(ChatColor.RED + "You can't change your own rank!");
+//                        return false;
+//                    }
 
                     mainClass.getRankManager().setRank(targetPlayer.getUniqueId(), rank, false);
 

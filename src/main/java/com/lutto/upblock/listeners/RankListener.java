@@ -1,5 +1,6 @@
 package com.lutto.upblock.listeners;
 
+import com.lutto.upblock.Rank;
 import com.lutto.upblock.UpBlock;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -38,6 +39,9 @@ public class RankListener implements Listener {
         for (String permission : mainClass.getRankManager().getRank(player.getUniqueId()).getPermissions()) {
             permissionAttachment.setPermission(permission, true);
         }
+
+        Rank playerRank = mainClass.getRankManager().getRank(player.getUniqueId());
+        player.setPlayerListName(playerRank.getDisplay() + " " + ChatColor.WHITE + player.getName());
 
     }
 

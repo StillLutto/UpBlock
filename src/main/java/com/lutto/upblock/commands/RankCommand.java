@@ -47,10 +47,10 @@ public class RankCommand implements CommandExecutor {
                 if (rank.name().equalsIgnoreCase(args[2])) {
 
                     // commented for testing purposes
-//                    if (targetPlayer.getUniqueId() == player.getUniqueId()) {
-//                        player.sendMessage(ChatColor.RED + "You can't change your own rank!");
-//                        return false;
-//                    }
+                    if (targetPlayer.getUniqueId() == player.getUniqueId()) {
+                        player.sendMessage(ChatColor.RED + "You can't change your own rank!");
+                        return false;
+                    }
 
                     mainClass.getRankManager().setRank(targetPlayer.getUniqueId(), rank, false);
 

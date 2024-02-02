@@ -26,6 +26,7 @@ repositories {
 
 dependencies {
     implementation(libs.net.dv8tion.jda)
+    implementation("io.github.cdimascio:dotenv-java:3.0.0")
     compileOnly(libs.org.spigotmc.spigot)
 }
 

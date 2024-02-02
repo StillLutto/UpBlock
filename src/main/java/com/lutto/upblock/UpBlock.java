@@ -5,7 +5,7 @@ import com.lutto.upblock.commands.tabcompleters.RankTabCompleter;
 import com.lutto.upblock.listeners.CustomTabListListener;
 import com.lutto.upblock.listeners.RankListener;
 import com.lutto.upblock.listeners.PlayerJoinListener;
-import com.lutto.upblock.managers.RankManager;
+import com.lutto.upblock.manager.RankManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 

@@ -1,4 +1,4 @@
-package com.lutto.upblock;
+package com.lutto.upblock.enums;
 
 import org.bukkit.ChatColor;
 

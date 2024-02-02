@@ -1,6 +1,6 @@
-package com.lutto.upblock.managers;
+package com.lutto.upblock.manager;
 
-import com.lutto.upblock.Rank;
+import com.lutto.upblock.enums.Rank;
 import com.lutto.upblock.UpBlock;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

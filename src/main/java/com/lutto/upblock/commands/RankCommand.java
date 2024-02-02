@@ -35,18 +35,18 @@ public class RankCommand implements CommandExecutor {
                 return false;
             }
 
-            if (!Bukkit.getOfflinePlayer(args[1]).hasPlayedBefore()) {
+            if (Bukkit.getPlayerExact(args[1]) == null) {
                 player.sendMessage(ChatColor.RED + "Player not found!");
                 return false;
             }
 
 
-            OfflinePlayer targetPlayer = Bukkit.getOfflinePlayer(args[1]);
+            OfflinePlayer targetPlayer = Bukkit.getPlayerExact(args[1]);
             for (Rank rank : Rank.values()) {
 
                 if (rank.name().equalsIgnoreCase(args[2])) {
 
-                    // commented for testing purposes
+                    // possibly commented for testing purposes
                     if (targetPlayer.getUniqueId() == player.getUniqueId()) {
                         player.sendMessage(ChatColor.RED + "You can't change your own rank!");
                         return false;
@@ -54,9 +54,9 @@ public class RankCommand implements CommandExecutor {
 
                     mainClass.getRankManager().setRank(targetPlayer.getUniqueId(), rank, false);
 
-                    player.sendMessage(ChatColor.GREEN + "You have changed " + targetPlayer.getName() + "'s rank to " + ChatColor.translateAlternateColorCodes('&', rank.getDisplay()) + ChatColor.GREEN + ".");
+                    player.sendMessage(ChatColor.GREEN + "You have changed " + targetPlayer.getName() + "'s rank to " + rank.getDisplay() + ChatColor.GREEN + ".");
                     if (targetPlayer.isOnline()) {
-                        targetPlayer.getPlayer().sendMessage(ChatColor.GREEN + player.getName() + " has changed you rank to " + ChatColor.translateAlternateColorCodes('&', rank.getDisplay()) + ChatColor.GREEN + ".");
+                        targetPlayer.getPlayer().sendMessage(ChatColor.GREEN + player.getName() + " has changed you rank to " + rank.getDisplay() + ChatColor.GREEN + ".");
                     }
 
                     return false;

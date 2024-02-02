@@ -48,3 +48,8 @@ tasks.withType<JavaCompile>() {
 tasks.withType<Javadoc>() {
     options.encoding = "UTF-8"
 }
+
+tasks.withType<Jar> {
+    // customize this to your needs
+    destinationDirectory = File("C:\\Users\\iAmEi\\OneDrive\\Desktop\\Files\\Programming\\Minecraft\\Plugins\\Servers\\UpBlock Server\\plugins")
+}

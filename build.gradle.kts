@@ -51,5 +51,5 @@ tasks.withType<Javadoc>() {
 
 tasks.withType<Jar> {
     // customize this to your needs
-    destinationDirectory = File("C:\\Users\\iAmEi\\OneDrive\\Desktop\\Files\\Programming\\Minecraft\\Plugins\\Servers\\UpBlock Server\\plugins")
+    destinationDirectory = File("C:\\Users\\iAmEi\\Desktop\\Files\\Programming\\Minecraft\\Plugins\\Servers\\UpBlock Server\\plugins")
 }

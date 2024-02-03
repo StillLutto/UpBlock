@@ -5,3 +5,5 @@ api-version: '1.20'
 commands:
   rank:
     description: Allows you to see the rank of a player and set the rank of a player
+  playtime:
+    description: Displays the playtime of a certain player

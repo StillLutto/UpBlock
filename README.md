@@ -10,6 +10,8 @@ Welcome to my plugin! This project was built with **gradle** and currently has s
 * Custom Player Join messages
 * Coming soon!
 
+**_WARNING_**: This is not an api, this is a project made by me to be able to practice my plugin making skills in the real world!
+
 ## Watch the showcase video!
 
 Coming soon!

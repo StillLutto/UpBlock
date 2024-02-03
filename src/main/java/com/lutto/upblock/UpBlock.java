@@ -6,6 +6,7 @@ import com.lutto.upblock.listeners.CustomTabListListener;
 import com.lutto.upblock.listeners.DiscordConsoleListener;
 import com.lutto.upblock.listeners.RankListener;
 import com.lutto.upblock.listeners.PlayerJoinListener;
+import com.lutto.upblock.manager.DatabaseManager;
 import com.lutto.upblock.manager.RankManager;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.JDA;
@@ -16,6 +17,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class UpBlock extends JavaPlugin {
+
+    private DatabaseManager databaseManager;
 
     private static Dotenv env;
 
@@ -40,16 +43,25 @@ public final class UpBlock extends JavaPlugin {
             throw new RuntimeException(e);
         }
 
+
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
         Bukkit.getPluginManager().registerEvents(new RankListener(this), this);
         Bukkit.getPluginManager().registerEvents(new CustomTabListListener(), this);
         getCommand("rank").setExecutor(new RankCommand(this));
         getCommand("rank").setTabCompleter(new RankTabCompleter());
 
+
         rankManager = new RankManager(this);
+        databaseManager = new DatabaseManager();
 
     }
 
+    @Override
+    public void onDisable() {
+        databaseManager.disconnect();
+    }
+
     public RankManager getRankManager() { return rankManager; }
+    public DatabaseManager getDatabaseManager() { return databaseManager; }
 
 }

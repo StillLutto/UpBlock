@@ -8,12 +8,11 @@ import java.sql.SQLException;
 
 public class DatabaseManager {
 
-    private final String HOST = Dotenv.configure().load().get("host");
-    private final int PORT = Integer.parseInt(Dotenv.configure().load().get("port"));
-    private final String DATABASE = Dotenv.configure().load().get("database");
-    private final String USERNAME = Dotenv.configure().load().get("username");
-    private final String PASSWORD = Dotenv.configure().load().get("password");
-
+    private final String HOST = Dotenv.configure().load().get("HOST");
+    private final int PORT = Integer.parseInt(Dotenv.configure().load().get("PORT"));
+    private final String DATABASE = Dotenv.configure().load().get("DATABASE");
+    private final String USERNAME = Dotenv.configure().load().get("DBUSERNAME");
+    private final String PASSWORD = Dotenv.configure().load().get("PASSWORD");
 
     private Connection connection;
 
@@ -38,6 +37,10 @@ public class DatabaseManager {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 
 }

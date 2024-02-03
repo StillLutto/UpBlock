@@ -26,21 +26,8 @@ public class RankListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
 
         Player player = event.getPlayer();
-        PermissionAttachment permissionAttachment;
-        HashMap<UUID, PermissionAttachment> permissions = mainClass.getRankManager().getPermissions();
 
-        if (!permissions.containsKey(player.getUniqueId())) {
-            permissionAttachment = player.addAttachment(mainClass);
-            permissions.put(player.getUniqueId(), permissionAttachment);
-        } else {
-            permissionAttachment = permissions.get(player);
-        }
-
-        for (String permission : mainClass.getRankManager().getRank(player.getUniqueId()).getPermissions()) {
-            permissionAttachment.setPermission(permission, true);
-        }
-
-        Rank playerRank = mainClass.getRankManager().getRank(player.getUniqueId());
+        Rank playerRank = mainClass.getPlayerManager().getCustomPlayer(player.getUniqueId()).getRank();
         player.setPlayerListName(playerRank.getDisplay() + " " + ChatColor.WHITE + player.getName());
 
     }
@@ -52,7 +39,7 @@ public class RankListener implements Listener {
 
         Player player = event.getPlayer();
 
-        Bukkit.broadcastMessage(mainClass.getRankManager().getRank(player.getUniqueId()).getDisplay() + ChatColor.WHITE + " " + player.getName() + " -> " + ChatColor.WHITE + event.getMessage());
+        Bukkit.broadcastMessage(mainClass.getPlayerManager().getCustomPlayer(player.getUniqueId()).getRank().getDisplay() + ChatColor.WHITE + " " + player.getName() + " -> " + ChatColor.WHITE + event.getMessage());
 
     }
 

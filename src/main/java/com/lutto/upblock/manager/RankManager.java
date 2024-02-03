@@ -17,78 +17,141 @@ public class RankManager {
 
     private UpBlock mainClass;
 
-    private File ranksFile;
-    private YamlConfiguration ranksFileConfig;
-
     private HashMap<UUID, PermissionAttachment> permissions = new HashMap<>();
 
     public RankManager(UpBlock mainClass) {
 
         this.mainClass = mainClass;
 
-        if (!mainClass.getDataFolder().exists()) {
-            mainClass.getDataFolder().mkdir();
-        }
-
-        ranksFile = new File(mainClass.getDataFolder(), "ranks.yml");
-        if (!ranksFile.exists()) {
-            try {
-                ranksFile.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        ranksFileConfig = YamlConfiguration.loadConfiguration(ranksFile);
-
     }
-
-    public void setRank(UUID uuid, Rank rank, boolean firstJoin) {
-
-        if (Bukkit.getOfflinePlayer(uuid).isOnline() && !firstJoin) {
-
-            Player player = Bukkit.getPlayer(uuid);
-            PermissionAttachment permissionAttachment;
-
-            if (permissions.containsKey(uuid)) {
-                permissionAttachment = permissions.get(uuid);
-            } else {
-                permissionAttachment = player.addAttachment(mainClass);
-                permissions.put(uuid, permissionAttachment);
-            }
-
-            for (String permission : getRank(uuid).getPermissions()) {
-                if (!player.hasPermission(permission)) return; // as a little failsafe
-
-                permissionAttachment.unsetPermission(permission);
-            }
-
-            for (String permission : rank.getPermissions()) {
-                permissionAttachment.setPermission(permission, true);
-            }
-
-        }
-
-        ranksFileConfig.set(uuid.toString(), rank.name());
-        try {
-            ranksFileConfig.save(ranksFile);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-
-        if (Bukkit.getOfflinePlayer(uuid).isOnline()) {
-            Player player = Bukkit.getPlayer(uuid);
-            Rank playerRank = mainClass.getRankManager().getRank(player.getUniqueId());
-            player.setPlayerListName(playerRank.getDisplay() + " " + ChatColor.WHITE + player.getName());
-        }
-
-    }
-
-    public Rank getRank(UUID uuid) {
-        return Rank.valueOf(ranksFileConfig.getString(uuid.toString()));
-    }
-
-    public HashMap<UUID, PermissionAttachment> getPermissions() { return permissions; }
-
+//
+//    public void setRank(UUID uuid, Rank rank, boolean firstJoin) {
+//
+//        if (Bukkit.getOfflinePlayer(uuid).isOnline() && !firstJoin) {
+//
+//            Player player = Bukkit.getPlayer(uuid);
+//            PermissionAttachment permissionAttachment;
+//
+//            if (permissions.containsKey(uuid)) {
+//                permissionAttachment = permissions.get(uuid);
+//            } else {
+//                permissionAttachment = player.addAttachment(mainClass);
+//                permissions.put(uuid, permissionAttachment);
+//            }
+//
+//            for (String permission : getRank(uuid).getPermissions()) {
+//                if (!player.hasPermission(permission)) return; // as a little failsafe
+//
+//                permissionAttachment.unsetPermission(permission);
+//            }
+//
+//            for (String permission : rank.getPermissions()) {
+//                permissionAttachment.setPermission(permission, true);
+//            }
+//
+//        }
+//
+//        try {
+//
+//            mainClass.getDatabaseManager().getConnection().prepareStatement("INSERT INTO players (ID, UUID, RANK)");
+//
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        mainClass.getDatabaseManager().connect("INSERT INTO players ")(uuid.toString(), rank.name());
+//        try {
+//            ranksFileConfig.save(ranksFile);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//
+//        if (Bukkit.getOfflinePlayer(uuid).isOnline()) {
+//            Player player = Bukkit.getPlayer(uuid);
+//            Rank playerRank = mainClass.getRankManager().getRank(player.getUniqueId());
+//            player.setPlayerListName(playerRank.getDisplay() + " " + ChatColor.WHITE + player.getName());
+//        }
+//
+//    }
+//
+//    public Rank getRank(UUID uuid) {
+//        return Rank.valueOf(ranksFileConfig.getString(uuid.toString()));
+//    }
+//
+//    public HashMap<UUID, PermissionAttachment> getPermissions() { return permissions; }
+//
+//
+////    private File ranksFile;
+////    private YamlConfiguration ranksFileConfig;
+//
+////    public RankManager(UpBlock mainClass) {
+////
+////        this.mainClass = mainClass;
+////
+////        if (!mainClass.getDataFolder().exists()) {
+////            mainClass.getDataFolder().mkdir();
+////        }
+////
+////        ranksFile = new File(mainClass.getDataFolder(), "ranks.yml");
+////        if (!ranksFile.exists()) {
+////            try {
+////                ranksFile.createNewFile();
+////            } catch (IOException e) {
+////                throw new RuntimeException(e);
+////            }
+////        }
+////
+////        ranksFileConfig = YamlConfiguration.loadConfiguration(ranksFile);
+////
+////    }
+////
+////    public void setRank(UUID uuid, Rank rank, boolean firstJoin) {
+////
+////        if (Bukkit.getOfflinePlayer(uuid).isOnline() && !firstJoin) {
+////
+////            Player player = Bukkit.getPlayer(uuid);
+////            PermissionAttachment permissionAttachment;
+////
+////            if (permissions.containsKey(uuid)) {
+////                permissionAttachment = permissions.get(uuid);
+////            } else {
+////                permissionAttachment = player.addAttachment(mainClass);
+////                permissions.put(uuid, permissionAttachment);
+////            }
+////
+////            for (String permission : getRank(uuid).getPermissions()) {
+////                if (!player.hasPermission(permission)) return; // as a little failsafe
+////
+////                permissionAttachment.unsetPermission(permission);
+////            }
+////
+////            for (String permission : rank.getPermissions()) {
+////                permissionAttachment.setPermission(permission, true);
+////            }
+////
+////        }
+////
+////        ranksFileConfig.set(uuid.toString(), rank.name());
+////        try {
+////            ranksFileConfig.save(ranksFile);
+////        } catch (IOException e) {
+////            throw new RuntimeException(e);
+////        }
+////
+////
+////        if (Bukkit.getOfflinePlayer(uuid).isOnline()) {
+////            Player player = Bukkit.getPlayer(uuid);
+////            Rank playerRank = mainClass.getRankManager().getRank(player.getUniqueId());
+////            player.setPlayerListName(playerRank.getDisplay() + " " + ChatColor.WHITE + player.getName());
+////        }
+////
+////    }
+////
+////    public Rank getRank(UUID uuid) {
+////        return Rank.valueOf(ranksFileConfig.getString(uuid.toString()));
+////    }
+////
+////    public HashMap<UUID, PermissionAttachment> getPermissions() { return permissions; }
+//
 }

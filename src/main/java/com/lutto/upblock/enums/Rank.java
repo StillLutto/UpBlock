@@ -7,7 +7,8 @@ public enum Rank {
     OWNER(ChatColor.GRAY + "[" + ChatColor.RED + "Owner" + ChatColor.GRAY + "]", 'a', new String[]{"upblock.rank"}),
     MODERATOR(ChatColor.GRAY + "[" + ChatColor.DARK_GREEN + "Moderator" + ChatColor.GRAY + "]", 'b', new String[]{}),
     HELPER(ChatColor.GRAY + "[" + ChatColor.BLUE + "Helper" + ChatColor.GRAY + "]", 'c', new String[]{}),
-    TESTER(ChatColor.GRAY + "[" + ChatColor.AQUA + "Tester" + ChatColor.GRAY + "]", 'd', new String[]{});
+    TESTER(ChatColor.GRAY + "[" + ChatColor.AQUA + "Tester" + ChatColor.GRAY + "]", 'd', new String[]{}),
+    GUEST(ChatColor.GRAY + "[" + ChatColor.WHITE + "GUEST" + ChatColor.GRAY + "]", 'e', new String[]{});
 
     private String display;
     private char orderSymbol;

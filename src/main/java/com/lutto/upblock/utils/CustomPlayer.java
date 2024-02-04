@@ -32,7 +32,7 @@ public class CustomPlayer {
             PreparedStatement setPlayerProfile = mainClass.getDatabaseManager().getConnection().prepareStatement("INSERT INTO players (ID, UUID, RANK, PLAYTIME) VALUES(" +
                     "default," +
                     "'" + uuid + "'," +
-                    "'" + rank.toString() + "'" +
+                    "'" + rank.toString() + "'," +
                     playtime + ");");
             setPlayerProfile.executeUpdate();
         }

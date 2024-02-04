@@ -32,12 +32,12 @@ public final class UpBlock extends JavaPlugin {
     public void onEnable() {
 
         env = Dotenv.configure().load();
-        String discordBotToken = env.get("token");
+        String discordBotToken = env.get("TOKEN");
 
         JDABuilder jdaBuilder = JDABuilder.createDefault(discordBotToken);
         jdaBuilder.setActivity(Activity.playing("UpBlock.minehut.gg"));
         jdaBuilder.addEventListeners(new DiscordConsoleListener(this));
-        jdaBuilder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
+        jdaBuilder.enableIntents(GatewayIntent.GUILD_MESSAGES);
         try {
             jda = jdaBuilder.build();
             System.out.println("Successfully connected to discord bot!");

@@ -25,9 +25,9 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.net.dv8tion.jda)
+    implementation("net.dv8tion:JDA:5.0.0-alpha.1")
     implementation("io.github.cdimascio:dotenv-java:3.0.0")
-    compileOnly(libs.org.spigotmc.spigot)
+    compileOnly("org.spigotmc:spigot:1.20.1-R0.1-SNAPSHOT")
 }
 
 group = "com.lutto"

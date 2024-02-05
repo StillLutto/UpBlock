@@ -7,7 +7,6 @@ import com.lutto.upblock.commands.tabcompleters.RankTabCompleter;
 import com.lutto.upblock.listeners.*;
 import com.lutto.upblock.manager.DatabaseManager;
 import com.lutto.upblock.manager.PlayerManager;
-import com.lutto.upblock.manager.RankManager;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -24,7 +23,6 @@ public final class UpBlock extends JavaPlugin {
 
     private JDA jda;
 
-    private RankManager rankManager;
     private DatabaseManager databaseManager;
     private PlayerManager playerManager;
 
@@ -57,7 +55,6 @@ public final class UpBlock extends JavaPlugin {
         getCommand("playtime").setTabCompleter(new PlaytimeTabCompleter());
 
 
-        rankManager = new RankManager(this);
         databaseManager = new DatabaseManager();
         playerManager = new PlayerManager();
 
@@ -74,7 +71,6 @@ public final class UpBlock extends JavaPlugin {
         databaseManager.disconnect();
     }
 
-    public RankManager getRankManager() { return rankManager; }
     public DatabaseManager getDatabaseManager() { return databaseManager; }
     public PlayerManager getPlayerManager() { return playerManager; }
 

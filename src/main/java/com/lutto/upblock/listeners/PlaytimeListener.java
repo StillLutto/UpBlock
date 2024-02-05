@@ -12,8 +12,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class PlaytimeListener implements Listener {
 
@@ -46,7 +48,7 @@ public class PlaytimeListener implements Listener {
         if (!playerJoinTime.containsKey(event.getPlayer().getUniqueId())) return;
 
         setPlaytime(event.getPlayer());
-        playerJoinTime.put(event.getPlayer().getUniqueId(), 0L);
+        playerJoinTime.put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
 
         System.out.println(playerJoinTime.get(event.getPlayer().getUniqueId()));
 
@@ -54,11 +56,11 @@ public class PlaytimeListener implements Listener {
 
     public void setPlaytime(Player player) {
 
-        Long currentSessionTime = System.currentTimeMillis() - playerJoinTime.get(player.getUniqueId());
-        long currentSessionInSeconds = currentSessionTime / 1000 % 60;
+        long currentSessionTime = System.currentTimeMillis() - playerJoinTime.get(player.getUniqueId());
+        long currentSessionInSeconds = TimeUnit.MILLISECONDS.toSeconds(currentSessionTime);
 
         CustomPlayer playerData = mainClass.getPlayerManager().getCustomPlayer(player.getUniqueId());
-        playerData.setPlaytime(playerData.getPlaytime() + currentSessionInSeconds);
+        playerData.addPlaytime(playerData.getPlaytime() + currentSessionInSeconds);
 
     }
 

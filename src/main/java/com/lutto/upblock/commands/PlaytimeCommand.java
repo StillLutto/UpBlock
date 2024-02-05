@@ -41,13 +41,18 @@ public class PlaytimeCommand implements CommandExecutor {
             SetPlaytimeEvent setPlaytimeEvent = new SetPlaytimeEvent(target);
             Bukkit.getPluginManager().callEvent(setPlaytimeEvent);
 
-            Long targetPlaytime = mainClass.getPlayerManager().getCustomPlayer(target.getUniqueId()).getPlaytime() / 60;
+            Long targetPlaytime = mainClass.getPlayerManager().getCustomPlayer(target.getUniqueId()).getPlaytime();
 
             long playtimeToDays = TimeUnit.SECONDS.toDays(targetPlaytime);
-            long playtimeToHours = (TimeUnit.SECONDS.toHours(targetPlaytime) - (playtimeToDays * 24L));
-            long playtimeToMinutes = (TimeUnit.SECONDS.toMinutes(targetPlaytime) - (TimeUnit.SECONDS.toHours(targetPlaytime) * 60));
-            long playtimeToSeconds = (TimeUnit.SECONDS.toSeconds(targetPlaytime) - (TimeUnit.SECONDS.toMinutes(targetPlaytime) * 60));
-            player.sendMessage(ChatColor.GREEN + target.getName() + " has played for " + playtimeToDays + " days, " + playtimeToHours + " hours, " + playtimeToMinutes + " minutes, " + playtimeToSeconds + " seconds.");
+            long playtimeToHours = (TimeUnit.SECONDS.toHours(targetPlaytime) - (playtimeToDays * 24));
+            long playtimeToMinutes = (TimeUnit.SECONDS.toMinutes(targetPlaytime) - (playtimeToHours * 60));
+            long playtimeToSeconds = (TimeUnit.SECONDS.toSeconds(targetPlaytime) - (playtimeToMinutes * 60));
+
+            player.sendMessage(ChatColor.GREEN + player.getName() + " has played for " +
+                    playtimeToDays + " days, " +
+                    playtimeToHours  + " hours, " +
+                    playtimeToMinutes + " minutes and " +
+                    playtimeToSeconds + " seconds.");
 
         } else {
             player.sendMessage(ChatColor.RED + "Player not found! Has the player joined before?");

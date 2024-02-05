@@ -6,7 +6,9 @@ import com.lutto.upblock.enums.Rank;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class CustomPlayer {
 
@@ -15,6 +17,8 @@ public class CustomPlayer {
     private UUID uuid;
     private Rank rank;
     private long playtime;
+
+    private HashMap<UUID, Long> lastAddedPlaytime = new HashMap<>();
 
     public CustomPlayer(UpBlock mainClass, UUID uuid) throws SQLException {
         this.uuid = uuid;
@@ -27,6 +31,7 @@ public class CustomPlayer {
             rank = Rank.valueOf(resultSet.getString("RANK"));
             playtime = resultSet.getInt("PLAYTIME");
         } else {
+            System.out.println("else");
             rank = Rank.GUEST;
             playtime = 0;
             PreparedStatement setPlayerProfile = mainClass.getDatabaseManager().getConnection().prepareStatement("INSERT INTO players (ID, UUID, RANK, PLAYTIME) VALUES(" +
@@ -57,6 +62,24 @@ public class CustomPlayer {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void addPlaytime(long playtime) {
+        this.playtime = playtime;
+
+        if (lastAddedPlaytime.containsKey(uuid)) {
+            playtime = playtime - lastAddedPlaytime.get(uuid);
+        } else {
+            lastAddedPlaytime.put(uuid, playtime);
+        }
+
+        try {
+            PreparedStatement updatePlayerProfile = mainClass.getDatabaseManager().getConnection().prepareStatement("UPDATE players SET PLAYTIME = '" + this.playtime + "' WHERE UUID = '" + uuid + "';");
+            updatePlayerProfile.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public Rank getRank() { return rank; }
